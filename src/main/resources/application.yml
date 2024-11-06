@@ -4,6 +4,10 @@ server:
     include-stacktrace: NEVER
     include-binding-errors: NEVER
 
+app:
+  token:
+    secret-key: ${JWT_SECRET:Y3Vyc28tYXV0ZW50aWNhY2FvLXN0YXRlZnVsLXN0YXRlbGVzcy1taXJvc3NlcnZpY29zLWRhbnRhcw==}
+
 logging:
   level:
     org.springframework.security: DEBUG

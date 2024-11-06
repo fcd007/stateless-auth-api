@@ -24,7 +24,7 @@ public class User {
   private Integer id;
 
   @Column(nullable = false)
-  private String name;
+  private String username;
 
   @Column(nullable = false)
   private String email;
