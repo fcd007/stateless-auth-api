@@ -2,7 +2,7 @@ package br.com.microservice.stateless_auth_api.core.service;
 
 import static org.springframework.util.ObjectUtils.isEmpty;
 
-import br.com.microservice.stateless_auth_api.core.model.User;
+import br.com.microservice.stateless_auth_api.domain.model.User;
 import br.com.microservice.stateless_auth_api.infra.exception.AuthenticationException;
 import br.com.microservice.stateless_auth_api.infra.exception.ValidationException;
 import io.jsonwebtoken.Claims;
@@ -57,10 +57,10 @@ public class JwtService {
     return Keys.hmacShaKeyFor(secretKey.getBytes());
   }
 
-  public Claims getClaims(String token) {
+  public void validateAccessToken(String token) {
     var accessToken = extractToken(token);
     try {
-      return Jwts
+      Jwts
           .parser()
           .verifyWith(generateSign())
           .build()

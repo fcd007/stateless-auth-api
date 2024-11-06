@@ -1,4 +1,4 @@
-package br.com.microservice.stateless_auth_api.core.model;
+package br.com.microservice.stateless_auth_api.domain.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
