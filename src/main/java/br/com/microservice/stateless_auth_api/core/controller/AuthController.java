@@ -4,6 +4,7 @@ import br.com.microservice.stateless_auth_api.core.service.AuthService;
 import br.com.microservice.stateless_auth_api.domain.dto.AuthRequest;
 import br.com.microservice.stateless_auth_api.domain.dto.TokenDTO;
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
+@Log4j2
 @RequestMapping("api/v1/auth")
 public class AuthController {
 
@@ -20,13 +22,21 @@ public class AuthController {
 
   @PostMapping("/login")
   public ResponseEntity<TokenDTO> login(@RequestBody AuthRequest request) {
+    log.info("Request received to login");
+
     var token = authService.login(request);
+
+    log.info("Logged in successfully");
     return ResponseEntity.ok(token);
   }
 
   @PostMapping("/token/validate")
-  public ResponseEntity<TokenDTO> login(@RequestHeader String accessToken) {
+  public ResponseEntity<TokenDTO> loginValidate(@RequestHeader String accessToken) {
+    log.info("Request received to validate token");
+
     var token = authService.validateToken(accessToken);
+
+    log.info("Token validated successfully");
     return ResponseEntity.ok(token);
   }
 }

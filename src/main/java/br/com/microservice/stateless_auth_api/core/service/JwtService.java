@@ -77,7 +77,11 @@ public class JwtService {
     }
 
     if (!token.contains(EMPTY_STRING_SPACE)) {
-      return token.split(EMPTY_STRING_SPACE)[TOKEN_INDEX];
+      String[] tokenParts = token.split(EMPTY_STRING_SPACE);
+
+      if(tokenParts.length > 1) {
+        return tokenParts[TOKEN_INDEX];
+      }
     }
 
     return token;
