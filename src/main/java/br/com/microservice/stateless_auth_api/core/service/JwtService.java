@@ -21,8 +21,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class JwtService {
 
-  private static final Date DATA_ATUAL = new Date();
-  private static final Integer EXPIRATION_TIME_HOUR = 1;
+  private static final Date DATE = new Date();
+  private static final Integer EXPIRATION_TIME_HOUR = 2;
   private static final String EMPTY_STRING_SPACE = " ";
   private static final Integer TOKEN_INDEX = 1;
 
@@ -36,7 +36,7 @@ public class JwtService {
 
     return Jwts
         .builder().claims(data)
-        .issuedAt(DATA_ATUAL)
+        .issuedAt(DATE)
         .expiration(generateExpireAt())
         .signWith(generateSign())
         .compact();
