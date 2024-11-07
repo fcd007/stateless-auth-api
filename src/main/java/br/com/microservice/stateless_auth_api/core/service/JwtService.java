@@ -21,23 +21,21 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class JwtService {
 
-  @Value("${app.token.secret-key}")
-  private String secretKey;
-
   private static final Date DATA_ATUAL = new Date();
   private static final Integer EXPIRATION_TIME_HOUR = 1;
   private static final String EMPTY_STRING_SPACE = " ";
   private static final Integer TOKEN_INDEX = 1;
 
+  @Value("${app.token.secret-key}")
+  private String secretKey;
 
   public String createToken(User user) {
     var data = new HashMap<String, String>();
-    data.put("id", user.getId().toString());
+    data.put("id", String.valueOf(user.getId()));
     data.put("username", user.getUsername());
 
     return Jwts
-        .builder()
-        .subject(data.get("username"))
+        .builder().claims(data)
         .issuedAt(DATA_ATUAL)
         .expiration(generateExpireAt())
         .signWith(generateSign())
@@ -79,7 +77,7 @@ public class JwtService {
     if (!token.contains(EMPTY_STRING_SPACE)) {
       String[] tokenParts = token.split(EMPTY_STRING_SPACE);
 
-      if(tokenParts.length > 1) {
+      if (tokenParts.length > 1) {
         return tokenParts[TOKEN_INDEX];
       }
     }
