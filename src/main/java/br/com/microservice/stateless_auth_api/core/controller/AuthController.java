@@ -30,8 +30,8 @@ public class AuthController {
     return ResponseEntity.ok(token);
   }
 
-  @PostMapping("/token/validate")
-  public ResponseEntity<TokenDTO> loginValidate(@RequestHeader String accessToken) {
+  @PostMapping("/token/validate-token")
+  public ResponseEntity<TokenDTO> validateToken(@RequestHeader String accessToken) {
     log.info("Request received to validate token");
 
     var token = authService.validateToken(accessToken);
